@@ -1,0 +1,104 @@
+//menu button
+.menu-btn {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  margin-top: 20px;
+  z-index: 3;
+  @include easeInOut();
+  cursor: pointer;
+  .button-line {
+    width: 20px;
+    height: 1.5px;
+    margin-bottom: 5px;
+    background: set-text-color($primary-color);
+    @include easeInOut();
+  }
+  &.close {
+    transform: rotate(180deg);
+    .button-line {
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(11px, 7px);
+      }
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(3px, 2px);
+      }
+    }
+  }
+}
+
+// menu
+.menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  visibility: hidden;
+  opacity: 0.9;
+  &.show {
+    visibility: visible;
+  }
+  &-nav,
+  &-branding {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    float: left;
+    width: 50%;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+
+    li {
+      list-style-type: none;
+      margin-top: 1.3rem;
+      font-size: 1.8rem;
+      a:hover {
+        color: $secondary-color;
+      }
+    }
+  }
+  &-nav {
+    transform: translate3d(0, -100%, 0);
+    background: darken($primary-color, 3);
+    @include easeInOut;
+
+    &.show {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  &-branding {
+    transform: translate3d(0, 100%, 0);
+    background: darken($primary-color, 1);
+    .portrait {
+      background: url(../image/portrait.jpg);
+      background-size: cover;
+      border-radius: 50%;
+      border: 2px solid $secondary-color;
+      width: 200px;
+      height: 200px;
+    }
+    @include easeInOut;
+    &.show {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+.nav-item {
+  transform: translate3d(400px, 0, 0);
+  @include easeInOut;
+  &.show {
+    transform: translate3d(0, 0, 0);
+  }
+  &.current > a {
+    color: $secondary-color;
+  }
+}
+@for $x from 1 through 4 {
+  .nav-item:nth-child(#{$x}) {
+    transition-delay: $x * 0.1s;
+  }
+}
